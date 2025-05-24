@@ -1,0 +1,4 @@
+proxy_path: /etc/nginx/nginx.conf
+url: https://stan-robotshop.s3.amazonaws.com/frontend-v3.zip
+app_path: /usr/share/nginx/html
+component: frontend

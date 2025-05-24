@@ -42,7 +42,7 @@
 
 - name: Configuring systemd
   ansible.builtin.template:
-    src: "{{ component }}.serivce"
+    src: "{{ component }}.service
     dest: /etc/systemd/system/{{ component }}.service
 
 - name: Restarting {{ component }} service

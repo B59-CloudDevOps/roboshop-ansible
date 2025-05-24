@@ -3,7 +3,7 @@
 
 - name: Installing {{ component }}
   ansible.builtin.dnf:
-    name: {{ component }}
+    name: "{{ component }}"
     state: present
 
 - name: Making {{ component }} accessible

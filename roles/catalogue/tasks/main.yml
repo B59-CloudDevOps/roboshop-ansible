@@ -29,7 +29,7 @@
 
 - name: Configuring {{ component }} systemd
   ansible.builtin.template:
-    src: systemd.serivce
+    src: "{{ component }}.serivce"
     dest: "/etc/systemd/system/{{ component }}.service"
 
 - name: Configuring mongodrepo 

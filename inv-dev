@@ -6,3 +6,6 @@ mongodb-dev.clouding-app.shop
 
 [catalogue]
 catalogue-dev.clouding-app.shop
+
+[redis]
+redis-dev.clouding-app.shop

@@ -27,11 +27,6 @@
     dest: "{{ app_path }}"
     remote_src: yes
 
-- name: Configuring {{ component }} systemd
-  ansible.builtin.template:
-    src: "{{ component }}.serivce"
-    dest: "/etc/systemd/system/{{ component }}.service"
-
 - name: Configuring mongodrepo 
   ansible.builtin.template:
     src: mongodb.repo
@@ -44,6 +39,11 @@
 
 - name: Injecting schema 
   ansible.builtin.shell: mongosh --host mongodb-{{ env }}.clouding-app.shop </app/db/master-data.js
+
+- name: Configuring systemd
+  ansible.builtin.template:
+    src: "{{ component }}.serivce"
+    dest: /etc/systemd/system/{{ component }}.service
 
 - name: Restarting {{ component }} service
   ansible.builtin.systemd_service:

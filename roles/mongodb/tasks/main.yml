@@ -1,38 +1,19 @@
-- name: Configuring nginx124
-  ansible.builtin.shell: dnf module disable nginx -y ; dnf module enable nginx:1.24 -y
+- name: Configuring repo 
+  ansible.builtin.template:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
 
-- name: Installing nginx
+- name: Installing {{ component }}
   ansible.builtin.dnf:
-    name: nginx
+    name: mongodb-org
     state: present
 
-- name: copying nginx proxy file
-  ansible.builtin.template:
-    src: nginx.conf
-    dest: "{{ proxy_path }}"
-
-- name: Clearning old {{ component }} content
-  ansible.builtin.file:
-    path: "{{ app_path }}"
-    state: absent
-
-- name: Creating {{ component }} directoru
-  ansible.builtin.file:
-    path: "{{ app_path }}"
-    state: directory
-
-- name: Downloading {{ component }} content
-  ansible.builtin.unarchive:
-    src: "{{ url }}"
-    dest: "{{ app_path }}"
-    remote_src: yes
-
-
-- name: Restartr {{ component }} service
+- name: Restarting {{ component }} service
   ansible.builtin.systemd_service:
-    state: restarted
+    state: started
     daemon_reload: true
-    name: nginx
+    name: mongod
+    enabled: true
 
 - name: Configuring hostname for {{ component }}
   ansible.builtin.shell: set-hostname {{ component }}-{{ env }}

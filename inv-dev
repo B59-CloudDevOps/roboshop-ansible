@@ -9,3 +9,6 @@ catalogue-dev.clouding-app.shop
 
 [redis]
 redis-dev.clouding-app.shop
+
+[user]
+user-dev.clouding-app.shop

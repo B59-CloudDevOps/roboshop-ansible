@@ -1,2 +1,5 @@
 [frontend]
 frontend-dev.clouding-app.shop
+
+[mongodb]
+mongodb-dev.clouding-app.shop

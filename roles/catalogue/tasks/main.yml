@@ -45,6 +45,11 @@
     src: "{{ component }}.service"
     dest: /etc/systemd/system/{{ component }}.service
 
+- name: Generating node modules
+  ansible.builtin.shell: npm install
+  args:
+    chdir: "{{ app_path }}"
+
 - name: Restarting {{ component }} service
   ansible.builtin.systemd_service:
     state: restarted

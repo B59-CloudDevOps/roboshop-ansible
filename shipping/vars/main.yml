@@ -1,0 +1,4 @@
+component: shipping
+app_user: roboshop
+app_path: /app
+url: https://stan-robotshop.s3.amazonaws.com/shipping-v3.zip 

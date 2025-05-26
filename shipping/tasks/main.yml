@@ -35,13 +35,8 @@
     state: present
 
 - name: Injecting schema 
-  ansible.builtin.shell: mysql -h mysql-{{ env }}.clouding-app.shop -uroot -pRoboShop@1 < /app/db/schema.sql
-
-- name: Injecting App user schema 
-  ansible.builtin.shell: mysql -h mysql-{{ env }}.clouding-app.shop -uroot -pRoboShop@1 < /app/db/app-user.sql
-
-- name: Injecting Master schema 
-  ansible.builtin.shell: mysql -h mysql-{{ env }}.clouding-app.shop -uroot -pRoboShop@1 < /app/db/master-data.sql
+  loop: "{{ schema }}"
+  ansible.builtin.shell: mysql -h mysql-{{ env }}.clouding-app.shop -u{{ secrets.mysql_user }} -p{{ secrets.mysql_pass }} < /app/db/{{ item }}.sql
 
 - name: Configuring systemd
   ansible.builtin.template:

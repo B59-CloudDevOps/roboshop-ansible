@@ -27,18 +27,11 @@
     dest: "{{ app_path }}"
     remote_src: yes
 
-- name: Configuring mongodrepo 
-  ansible.builtin.template:
-    src: mongodb.repo
-    dest: /etc/yum.repos.d/mongodb.repo
-
-- name: Installing mongoshell
-  ansible.builtin.dnf:
-    name: mongodb-mongosh
-    state: present
-
-- name: Injecting schema 
-  ansible.builtin.shell: mongosh --host mongodb-{{ env }}.clouding-app.shop </app/db/master-data.js
+- name: Injecting mognodb schema for {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: inject-mongodb-schema
+  when: setup_schema is defined
 
 - name: Configuring systemd
   ansible.builtin.template:

@@ -13,14 +13,10 @@
   args:
     chdir: "{{ app_path }}"
 
-- name: Installing mysql shell
-  ansible.builtin.dnf:
-    name: mysql
-    state: present
-
-- name: Injecting schema 
-  loop: "{{ schema }}"
-  ansible.builtin.shell: mysql -h mysql-{{ env }}.clouding-app.shop -u{{ secrets.mysql_user }} -p{{ secrets.mysql_pass }} < /app/db/{{ item }}.sql
+- name: Injecting mysql schema for {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: inject-mysql-schema
   when: setup_schema is defined
 
 - name: Configuring systemd

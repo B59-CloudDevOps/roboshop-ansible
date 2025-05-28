@@ -6,26 +6,10 @@
     name: nodejs
     state: present
 
-- name: creating app user for {{ component }}
-  ansible.builtin.user:
-    name: "{{ app_user }}"
-
-- name: cleanup old {{ component }} content
-  ansible.builtin.file: 
-    path: "{{ app_path }}"
-    state: absent 
-  ignore_errors: true
-
-- name: Creating {{ component }} app directory
-  ansible.builtin.file: 
-    path: "{{ app_path }}"
-    state: directory 
-
-- name: Downloading and extracting {{ component }} content
-  ansible.builtin.unarchive:
-    src: "{{ url }}"
-    dest: "{{ app_path }}"
-    remote_src: yes
+- name: Configuing app
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: create-user-and-appdir
 
 - name: Injecting mognodb schema for {{ component }}
   ansible.builtin.include_role:

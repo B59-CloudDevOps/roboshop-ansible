@@ -24,3 +24,6 @@ shipping-dev.clouding-app.shop
 
 [rabbitmq]
 rabbitmq-dev.clouding-app.shop
+
+[payment]
+payment-dev.clouding-app.shop

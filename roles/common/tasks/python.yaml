@@ -1,0 +1,34 @@
+- name: Installing Python3
+  ansible.builtin.dnf:
+    name: 
+      - python3
+      - gcc
+      - python3-devel
+    state: present
+
+- name: Configuing app
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: create-user-and-appdir
+
+- name: Generating artifacts
+  ansible.builtin.shell: pip3 install -r requirements.txt
+  args:
+    chdir: "{{ app_path }}"
+
+- name: Configuring systemd
+  ansible.builtin.template:
+    src: "{{ component }}.service"
+    dest: /etc/systemd/system/{{ component }}.service
+
+- name: Restarting {{ component }} service
+  ansible.builtin.systemd_service:
+    state: restarted
+    daemon_reload: true
+    name: "{{ component }}"
+    enabled: true
+
+- name: Configuring hostname for {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname

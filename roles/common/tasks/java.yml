@@ -1,0 +1,41 @@
+- name: Installing maven
+  ansible.builtin.dnf:
+    name: maven
+    state: present
+
+- name: Configuing app
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: create-user-and-appdir
+
+- name: Generating artifacts
+  ansible.builtin.shell: mvn clean package ; mv target/{{ component }}-1.0.jar {{ component }}.jar
+  args:
+    chdir: "{{ app_path }}"
+
+- name: Installing mysql shell
+  ansible.builtin.dnf:
+    name: mysql
+    state: present
+
+- name: Injecting schema 
+  loop: "{{ schema }}"
+  ansible.builtin.shell: mysql -h mysql-{{ env }}.clouding-app.shop -u{{ secrets.mysql_user }} -p{{ secrets.mysql_pass }} < /app/db/{{ item }}.sql
+  when: setup_schema is defined
+
+- name: Configuring systemd
+  ansible.builtin.template:
+    src: "{{ component }}.service"
+    dest: /etc/systemd/system/{{ component }}.service
+
+- name: Restarting {{ component }} service
+  ansible.builtin.systemd_service:
+    state: restarted
+    daemon_reload: true
+    name: "{{ component }}"
+    enabled: true
+
+- name: Configuring hostname for {{ component }}
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname

@@ -10,3 +10,6 @@ SOP :
   * What if in future if 5 more nodejs components comes up ? 
   * Identify the common pattern for nodejs and place them in a common role
   * Then import them whereever it's needed.
+  
+> Right now, we just have one java component which is shipping & one python component which is payment.
+  * Keeping the future java or payment components in to consideration, I would like to write common files

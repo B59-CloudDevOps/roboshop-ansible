@@ -1,0 +1,9 @@
+component: payment
+app_user: roboshop
+app_path: /app
+url: https://stan-robotshop.s3.amazonaws.com/payment-v3.zip 
+schema: 
+  - schema
+  - app-user
+  - master-data
+secrets: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=roboshop-{{ env }}/data/rabbitmq token={{ token }} url=https://vault.clouding-app.shop:8200  validate_certs=False') }}"

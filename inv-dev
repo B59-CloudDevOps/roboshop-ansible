@@ -21,3 +21,6 @@ mysql-dev.clouding-app.shop
 
 [shipping]
 shipping-dev.clouding-app.shop
+
+[rabbitmq]
+rabbitmq-dev.clouding-app.shop

@@ -13,3 +13,10 @@ SOP :
   
 > Right now, we just have one java component which is shipping & one python component which is payment.
   * Keeping the future java or payment components in to consideration, I would like to write common files
+
+
+> roboshop
+    1) Running TF to create the infra.
+    2) playing the ansible-playbooks to make the configuration management. 
+
+    With a sinle click I want the whole infra

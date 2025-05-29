@@ -9,7 +9,7 @@
 - name: Vault-prereq
   ansible.builtin.include_role:
     name: common
-    tasks_from: Vault-prereq
+    tasks_from: vault-prereq
 
 - name: copying nginx proxy file
   ansible.builtin.template:

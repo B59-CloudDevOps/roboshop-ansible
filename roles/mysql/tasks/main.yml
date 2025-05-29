@@ -6,7 +6,7 @@
 - name: Vault-prereq
   ansible.builtin.include_role:
     name: common
-    tasks_from: Vault-prereq
+    tasks_from: vault-prereq
 
 - name: Restarting {{ component }} service
   ansible.builtin.systemd_service:

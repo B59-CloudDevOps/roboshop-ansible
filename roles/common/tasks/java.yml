@@ -9,7 +9,7 @@
     tasks_from: create-user-and-appdir
 
 - name: Installing vault pre-req package 
-  ansible.builtin.shell: pip3 install hvac
+  ansible.builtin.shell: pip3.11 install hvac
 
 - name: Generating artifacts
   ansible.builtin.shell: mvn clean package ; mv target/{{ component }}-1.0.jar {{ component }}.jar

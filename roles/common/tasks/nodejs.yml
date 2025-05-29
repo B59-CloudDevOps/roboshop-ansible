@@ -6,10 +6,8 @@
     name: nodejs
     state: present
 
-- name: Vault-prereq
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: vault-prereq
+- name: Installing vault pre-req package 
+  ansible.builtin.shell: pip3 install hvac
 
 - name: Configuing app
   ansible.builtin.include_role:

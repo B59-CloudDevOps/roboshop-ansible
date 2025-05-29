@@ -8,10 +8,8 @@
     name: common
     tasks_from: create-user-and-appdir
 
-- name: Vault-prereq
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: vault-prereq
+- name: Installing vault pre-req package 
+  ansible.builtin.shell: pip3 install hvac
 
 - name: Generating artifacts
   ansible.builtin.shell: mvn clean package ; mv target/{{ component }}-1.0.jar {{ component }}.jar

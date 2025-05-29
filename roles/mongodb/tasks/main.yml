@@ -3,10 +3,8 @@
     src: mongodb.repo
     dest: /etc/yum.repos.d/mongodb.repo
 
-- name: Vault-prereq
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: vault-prereq
+- name: Installing vault pre-req package 
+  ansible.builtin.shell: pip3 install hvac
 
 - name: Installing {{ component }}
   ansible.builtin.dnf:

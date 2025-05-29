@@ -6,6 +6,11 @@
     name: nginx
     state: present
 
+- name: Vault-prereq
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: Vault-prereq
+
 - name: copying nginx proxy file
   ansible.builtin.template:
     src: nginx.conf

@@ -6,6 +6,11 @@
       - python3-devel
     state: present
 
+- name: Vault-prereq
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: Vault-prereq
+
 - name: Configuing app
   ansible.builtin.include_role:
     name: common

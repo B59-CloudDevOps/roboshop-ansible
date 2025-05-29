@@ -6,6 +6,11 @@
     name: "{{ component }}"
     state: present
 
+- name: Vault-prereq
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: Vault-prereq
+
 - name: Making {{ component }} accessible
   ansible.builtin.replace:
     path: /etc/redis/redis.conf
